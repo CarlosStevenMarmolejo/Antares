@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A1033">
+<title>Bono Pro Amor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: una sola columna centrada. Resumen general con las 10 tablillas, y cada tablilla con sus 20 casillas agrupadas por aporte. Mundo nocturno de Antares: azul noche, rojo y dorado sobre crema. */
+:root {
+  --ink: #0A1033;
+  --ink-2: #111B4C;
+  --panel: #151F58;
+  --line: #34407F;
+  --gold: #E8B04A;
+  --gold-soft: #F7D488;
+  --cream: #FCF0D8;
+  --text: #F3E3BC;
+  --muted: #B8B6D8;
+  --red: #C32E3A;
+  --red-deep: #7A1018;
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-accent: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html, body { height: auto; }
+body {
+  margin: 0;
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(200,32,48,0.40), rgba(200,32,48,0) 34%),
+    radial-gradient(circle at 100% 22%, rgba(200,32,48,0.26), rgba(200,32,48,0) 30%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 60%, var(--ink) 100%);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+  padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1, h2, h3, p { margin: 0; }
+a { color: var(--gold-soft); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--gold-soft); outline-offset: 2px; }
+
+/* Encabezado */
+.crear { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.crear-word { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: 5px; color: var(--cream); line-height: 1; }
+.crear-word sup { font-size: 10px; letter-spacing: 0; }
+.crear-sub { font-family: var(--font-display); font-weight: 500; font-size: 10px; letter-spacing: 4px; color: var(--cream); margin-top: 3px; }
+.hero {
+  border: 2px solid var(--gold); border-radius: 22px; padding: 16px 20px 18px;
+  background: linear-gradient(180deg, #FCF0D8 0%, #F0D8A8 100%); color: #0B1233;
+  display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+}
+.hero-main { display: flex; align-items: center; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.hero-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 9vw, 56px); letter-spacing: 3px; color: #8E1B22; line-height: 1; }
+.hero-code { font-family: var(--font-display); font-weight: 600; font-size: 18px; letter-spacing: 3px; color: #8E1B22; }
+.values { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; font-family: var(--font-display); font-weight: 600; font-size: 12px; letter-spacing: 1.5px; color: #0B1233; margin-top: 4px; }
+.ribbon {
+  align-self: center; text-align: center; padding: 10px 28px 12px; border: 2px solid var(--gold); border-radius: 16px;
+  background: linear-gradient(180deg, #B5232F 0%, var(--red-deep) 100%);
+}
+.ribbon h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(18px, 5vw, 28px); letter-spacing: 2px; color: #FBEFD6; line-height: 1.15; text-wrap: balance; }
+.ribbon p { font-family: var(--font-accent); font-style: italic; font-weight: 600; font-size: clamp(26px, 7vw, 38px); color: var(--gold-soft); line-height: 1; }
+.notice { border: 1px dashed var(--gold); border-radius: 12px; padding: 10px 14px; color: var(--cream); font-size: 14px; }
+
+/* Resumen */
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.kicker { font-family: var(--font-display); font-weight: 500; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.big { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 10vw, 52px); color: var(--gold-soft); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.big small { font-size: 0.4em; color: var(--muted); font-weight: 500; letter-spacing: 1px; }
+.bar { position: relative; height: 12px; border-radius: 99px; background: rgba(252,240,216,0.12); overflow: hidden; }
+.bar > i { position: absolute; left: 0; top: 0; bottom: 0; display: block; border-radius: 99px; }
+.bar .b-prom { background: repeating-linear-gradient(45deg, #E3A93C 0 6px, #F9DC95 6px 12px); }
+.bar .b-paid { background: linear-gradient(90deg, #C32E3A, #E8B04A); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--text); font-variant-numeric: tabular-nums; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.sw-paid { background: linear-gradient(90deg, #C32E3A, #E8B04A); }
+.sw-prom { background: repeating-linear-gradient(45deg, #E3A93C 0 4px, #F9DC95 4px 8px); }
+.list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.row { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; min-height: 44px; }
+.row:hover { border-color: var(--gold); }
+.row-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.row-name { font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: 0.5px; color: var(--cream); overflow-wrap: anywhere; min-width: 0; }
+.row-amt { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--gold-soft); white-space: nowrap; }
+.row-meta { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Tablilla */
+.back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 500; text-decoration: none; }
+.head-row { display: flex; flex-direction: column; gap: 6px; }
+.head-row label { font-family: var(--font-display); font-weight: 500; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.name-input {
+  width: 100%; box-sizing: border-box; min-height: 48px; padding: 8px 14px; border-radius: 12px; border: 1px solid var(--line);
+  background: rgba(252,240,216,0.06); color: var(--cream); font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: 0;
+}
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.hint { font-size: 15px; color: var(--cream); background: rgba(232,176,74,0.12); border: 1px dashed var(--gold); border-radius: 12px; padding: 10px 14px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.stat b { font-family: var(--font-display); font-size: 17px; color: var(--gold-soft); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--muted); }
+.tier { display: flex; flex-direction: column; gap: 10px; }
+.tier-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.tier-head h2 { font-family: var(--font-display); font-weight: 700; font-size: 24px; color: var(--gold-soft); font-variant-numeric: tabular-nums; }
+.tier-head span { font-size: 13px; color: var(--muted); }
+.cells { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; }
+.cell {
+  appearance: none; text-align: left; cursor: pointer; min-height: 100px; padding: 10px; border-radius: 14px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 6px; min-width: 0;
+}
+.cell .state { font-size: 12px; font-weight: 600; letter-spacing: 0.4px; display: flex; align-items: center; gap: 6px; }
+.cell .amt { font-family: var(--font-display); font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.cell .who { font-family: var(--font-accent); font-style: italic; font-weight: 600; font-size: 16px; line-height: 1.1; overflow-wrap: anywhere; }
+.cell.libre { background: rgba(252,240,216,0.05); border: 2px dashed var(--gold); color: var(--text); }
+.cell.libre .state { color: var(--muted); }
+.cell.libre:hover { background: rgba(252,240,216,0.1); }
+.cell.prometido { background: linear-gradient(160deg, #F9DC95, #E3A93C); border: 2px solid #FBE3A0; color: #0B1233; }
+.cell.aporto { background: linear-gradient(160deg, #C32E3A, #7A1018); border: 2px solid var(--gold); color: #FBEFD6; }
+
+/* Llave Bre-B */
+.pay { border: 2px solid var(--gold); border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(160deg, rgba(232,176,74,0.16), rgba(195,46,58,0.14)); }
+.pay-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.pay-key { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 6vw, 28px); letter-spacing: 1px; color: var(--gold-soft); user-select: all; overflow-wrap: anywhere; min-width: 0; }
+.pay-note { font-size: 14px; color: var(--text); }
+
+/* Hoja de edición */
+.scrim { position: fixed; inset: 0; z-index: 50; background: rgba(5,8,28,0.72); display: flex; align-items: flex-end; justify-content: center; }
+.sheet {
+  width: 100%; max-width: 520px; box-sizing: border-box; background: var(--ink-2); border: 1px solid var(--gold); border-bottom: 0;
+  border-radius: 22px 22px 0 0; display: flex; flex-direction: column; gap: 12px;
+  padding-top: 20px; padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.sheet h2 { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--gold-soft); }
+.sheet label { font-size: 14px; color: var(--muted); }
+.sheet input { width: 100%; box-sizing: border-box; min-height: 48px; padding: 8px 14px; border-radius: 12px; border: 1px solid var(--line); background: rgba(252,240,216,0.08); color: var(--cream); font-size: 18px; }
+.err { color: #FFB4A8; font-size: 14px; min-height: 0; }
+.btns { display: flex; flex-direction: column; gap: 10px; }
+.btn { min-height: 48px; border-radius: 12px; border: 2px solid var(--gold); background: transparent; color: var(--cream); font-weight: 600; cursor: pointer; padding: 8px 16px; }
+.btn.primary { background: linear-gradient(160deg, #F9DC95, #E3A93C); color: #0B1233; border-color: #FBE3A0; }
+.btn.ghost { border-color: transparent; color: var(--muted); text-decoration: underline; }
+.btn.danger { border-color: transparent; color: #FFB4A8; text-decoration: underline; }
+.foot { font-size: 13px; color: var(--muted); text-align: center; }
+.status { font-size: 14px; color: #FFB4A8; min-height: 0; }
+@media (max-width: 900px) { .cells { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .cells { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cell .amt { font-size: 22px; } }
+@media (prefers-reduced-motion: no-preference) {
+  .cell, .row, .btn { transition: background-color .15s, border-color .15s; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:14px">
+    <div class="crear">
+      <svg width="46" height="32" viewBox="-40 -36 80 56" fill="none" stroke="#E8B04A" stroke-width="2.4" stroke-linejoin="round" role="img" aria-label="Logo Crear Consciente">
+        <path d="M0 -32 C 11 -18 11 -4 0 8 C -11 -4 -11 -18 0 -32 Z"/>
+        <path d="M0 -32 C 11 -18 11 -4 0 8 C -11 -4 -11 -18 0 -32 Z" transform="rotate(38 0 8)"/>
+        <path d="M0 -32 C 11 -18 11 -4 0 8 C -11 -4 -11 -18 0 -32 Z" transform="rotate(-38 0 8)"/>
+        <path d="M0 -32 C 11 -18 11 -4 0 8 C -11 -4 -11 -18 0 -32 Z" transform="rotate(72 0 8)"/>
+        <path d="M0 -32 C 11 -18 11 -4 0 8 C -11 -4 -11 -18 0 -32 Z" transform="rotate(-72 0 8)"/>
+      </svg>
+      <div>
+        <div class="crear-word">CREAR<sup>®</sup></div>
+        <div class="crear-sub">CONSCIENTE</div>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="hero-main">
+        <svg width="64" height="64" viewBox="-80 -80 160 160" role="img" aria-label="Estrella Antares">
+          <defs><linearGradient id="starFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D93A2B"/><stop offset="1" stop-color="#8E1B22"/></linearGradient></defs>
+          <circle cx="0" cy="0" r="70" fill="none" stroke="#B3342C" stroke-width="2"/>
+          <g fill="#B3342C"><circle cx="0" cy="-70" r="6"/><circle cx="49.5" cy="-49.5" r="6"/><circle cx="70" cy="0" r="6"/><circle cx="49.5" cy="49.5" r="6"/><circle cx="0" cy="70" r="6"/><circle cx="-49.5" cy="49.5" r="6"/><circle cx="-70" cy="0" r="6"/><circle cx="-49.5" cy="-49.5" r="6"/></g>
+          <polygon points="0,-60 3.83,-9.24 24.04,-24.04 9.24,-3.83 60,0 9.24,3.83 24.04,24.04 3.83,9.24 0,60 -3.83,9.24 -24.04,24.04 -9.24,3.83 -60,0 -9.24,-3.83 -24.04,-24.04 -3.83,-9.24" fill="url(#starFill)" stroke="#E8B04A" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="hero-name">ANTARES</div>
+          <div class="hero-code">CCT-89</div>
+        </div>
+      </div>
+      <div class="values"><span>LIDERAZGO</span><span aria-hidden="true">✦</span><span>VALENTÍA</span><span aria-hidden="true">✦</span><span>TRANSFORMACIÓN</span></div>
+    </div>
+    <div class="ribbon">
+      <h1>BONO DE ENROLAMIENTO</h1>
+      <p>Pro Amor</p>
+    </div>
+  </header>
+
+  <section class="pay" aria-label="Dónde consignar">
+    <span class="kicker">Consigna por Bre-B</span>
+    <div class="pay-row">
+      <span id="llave" class="pay-key">@NEQUICAR3883</span>
+      <button id="copy-key" type="button" class="btn primary">Copiar llave</button>
+    </div>
+    <p class="pay-note">En tu app bancaria elige Bre-B, pega la llave y envía el aporte.</p>
+  </section>
+  <div id="notice"></div>
+  <main id="app" style="display:flex;flex-direction:column;gap:20px"></main>
+  <p id="foot" class="foot"></p>
+</div>
+<div id="sheet-root"></div>
+
+<script>
+(function () {
+  var SENIORS = 10;
+  var TIERS = [5000, 10000, 15000, 20000];
+  var PER = 8;
+  var CELLS = TIERS.length * PER;
+  var META_SENIOR = TIERS.reduce(function (a, t) { return a + t * PER; }, 0);
+  var META = META_SENIOR * SENIORS;
+
+  var DEFAULTS = ['Carlos Steven Marmolejo', 'Andrés Sandoval', 'Andrea Riaño', 'Luisa garcia', 'Francy ojeda', 'John parra', 'John martinez', 'Zoraida Llanos', 'Mauricio Terán', 'Luis tapia'];
+
+  var state = { seniors: {}, casillas: {}, view: 0, editing: null, db: null, dbChecked: false, msg: '' };
+
+  function money(n) { return '$' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function amountOf(i) { return TIERS[Math.floor(i / PER)]; }
+  function seniorName(n) {
+    var d = state.seniors['s' + n];
+    var v = d && typeof d.name === 'string' ? d.name.trim() : '';
+    return v || DEFAULTS[n - 1] || ('Super Senior ' + n);
+  }
+  function cellData(n, i) { return state.casillas['s' + n + '-' + i] || null; }
+  function stats(n) {
+    var s = { paid: 0, prom: 0, cp: 0, cm: 0 };
+    for (var i = 0; i < CELLS; i++) {
+      var d = cellData(n, i);
+      if (!d) continue;
+      if (d.estado === 'aporto') { s.paid += amountOf(i); s.cp++; }
+      else if (d.estado === 'prometido') { s.prom += amountOf(i); s.cm++; }
+    }
+    return s;
+  }
+
+  function h(tag, props) {
+    var el = document.createElement(tag);
+    if (props) {
+      Object.keys(props).forEach(function (k) {
+        var v = props[k];
+        if (v === false || v == null) return;
+        if (k === 'class') el.className = v;
+        else if (k.indexOf('on') === 0) el.addEventListener(k.slice(2), v);
+        else if (v === true) el.setAttribute(k, '');
+        else el.setAttribute(k, v);
+      });
+    }
+    for (var a = 2; a < arguments.length; a++) {
+      var kids = [].concat(arguments[a]);
+      for (var j = 0; j < kids.length; j++) {
+        var c = kids[j];
+        if (c == null || c === false) continue;
+        el.appendChild(c.nodeType ? c : document.createTextNode(String(c)));
+      }
+    }
+    return el;
+  }
+  function checkIcon() {
+    var t = document.createElement('template');
+    t.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
+    return t.content.firstChild;
+  }
+
+  function route() {
+    var m = /^#tablilla-(\d+)$/.exec(location.hash);
+    var n = m ? parseInt(m[1], 10) : 0;
+    state.view = (n >= 1 && n <= SENIORS) ? n : 0;
+  }
+
+  function barBlock(paid, prom, meta) {
+    var pp = Math.min(100, (paid / meta) * 100);
+    var pt = Math.min(100, ((paid + prom) / meta) * 100);
+    return h('div', { class: 'bar', 'aria-hidden': 'true' },
+      h('i', { class: 'b-prom', style: 'width:' + pt + '%' }),
+      h('i', { class: 'b-paid', style: 'width:' + pp + '%' }));
+  }
+  function legend(paid, prom) {
+    return h('div', { class: 'legend' },
+      h('span', null, h('i', { class: 'sw sw-paid' }), 'Ya aportó ' + money(paid)),
+      h('span', null, h('i', { class: 'sw sw-prom' }), 'Se comprometió ' + money(prom)));
+  }
+
+  function renderResumen() {
+    var tp = 0, tm = 0;
+    var items = [];
+    for (var n = 1; n <= SENIORS; n++) {
+      var s = stats(n);
+      tp += s.paid; tm += s.prom;
+      items.push(h('li', null,
+        h('a', { class: 'row', href: '#tablilla-' + n },
+          h('div', { class: 'row-top' },
+            h('span', { class: 'row-name' }, seniorName(n)),
+            h('span', { class: 'row-amt' }, money(s.paid))),
+          barBlock(s.paid, s.prom, META_SENIOR),
+          h('span', { class: 'row-meta' }, (s.cp + s.cm) + ' de ' + CELLS + ' casillas con nombre · ' + s.cp + ' ya aportaron'))));
+    }
+    return [
+      h('section', { class: 'card', 'aria-label': 'Total del grupo' },
+        h('span', { class: 'kicker' }, 'Recaudado por los ' + SENIORS + ' Super Seniors'),
+        h('div', { class: 'big' }, money(tp), ' ', h('small', null, 'de ' + money(META))),
+        barBlock(tp, tm, META),
+        legend(tp, tm)),
+      h('section', { 'aria-label': 'Tablillas' },
+        h('h2', { class: 'kicker', style: 'margin-bottom:10px' }, 'Elige una tablilla'),
+        h('ul', { class: 'list' }, items))
+    ];
+  }
+
+  function renderTablilla(n) {
+    var s = stats(n);
+    var nameInput = h('input', {
+      id: 'ss-name', class: 'name-input', type: 'text', maxlength: '40', value: state.seniors['s' + n] && state.seniors['s' + n].name ? state.seniors['s' + n].name : (DEFAULTS[n - 1] || ''),
+      placeholder: 'Super Senior ' + n, autocomplete: 'off',
+      onchange: function (e) { saveName(n, e.target.value); }
+    });
+    var tiers = TIERS.map(function (amt, t) {
+      var cells = [];
+      var taken = 0;
+      for (var k = 0; k < PER; k++) {
+        (function (i) {
+          var d = cellData(n, i);
+          var est = d && (d.estado === 'aporto' || d.estado === 'prometido') ? d.estado : 'libre';
+          if (est !== 'libre') taken++;
+          var label = est === 'aporto' ? 'Ya aportó' : (est === 'prometido' ? 'Se comprometió' : 'Libre');
+          var nm = d && typeof d.nombre === 'string' ? d.nombre : '';
+          var aria = 'Casilla de ' + money(amt) + ', ' + label.toLowerCase() + (nm ? ', ' + nm : '') + '. Editar';
+          cells.push(h('button', { type: 'button', class: 'cell ' + est, 'aria-label': aria, onclick: function () { openEditor(n, i); } },
+            h('span', { class: 'state' }, est === 'aporto' ? checkIcon() : null, label),
+            h('span', { class: 'amt' }, money(amt)),
+            h('span', { class: 'who' }, nm || (est === 'libre' ? 'Toca para elegirla' : ''))));
+        })(t * PER + k);
+      }
+      return h('section', { class: 'tier', 'aria-label': 'Aportes de ' + money(amt) },
+        h('div', { class: 'tier-head' }, h('h2', null, money(amt)), h('span', null, taken + ' de ' + PER + ' con nombre')),
+        h('div', { class: 'cells' }, cells));
+    });
+    return [
+      h('p', { class: 'kicker' }, 'Antares CCT-89 · Bono Pro Amor'),
+      h('a', { class: 'back', href: '#resumen' }, '← Todas las tablillas'),
+      h('div', { class: 'head-row' }, h('label', { for: 'ss-name' }, 'Tablilla de'), nameInput),
+      h('div', { class: 'stats' },
+        h('div', { class: 'stat' }, h('b', null, money(s.paid)), h('span', null, 'Ya aportaron (' + s.cp + ')')),
+        h('div', { class: 'stat' }, h('b', null, money(s.prom)), h('span', null, 'Prometidos (' + s.cm + ')')),
+        h('div', { class: 'stat' }, h('b', null, money(META_SENIOR)), h('span', null, 'Meta'))),
+      barBlock(s.paid, s.prom, META_SENIOR),
+      h('p', { class: 'hint' }, 'Toca una casilla libre, escribe el nombre de quien aporta y elige "Ya aportó" o "Se comprometió".'),
+      h('p', { id: 'msg', class: 'status', role: 'status' }, state.msg),
+    ].concat(tiers);
+  }
+
+  function render() {
+    var ae = document.activeElement;
+    if (ae && ae.id === 'ss-name') return;
+    var app = document.getElementById('app');
+    app.textContent = '';
+    var hd = document.querySelector('header');
+    if (hd) hd.hidden = state.view !== 0;
+    var parts = state.view === 0 ? renderResumen() : renderTablilla(state.view);
+    [].concat(parts).forEach(function (p) { app.appendChild(p); });
+    var notice = document.getElementById('notice');
+    notice.textContent = '';
+    if (state.dbChecked && !state.db) {
+      notice.appendChild(h('p', { class: 'notice' }, 'Sin conexión a la base de datos: lo que marques aquí no se guarda ni lo ven los demás. Revisa que firebase-config.js tenga la configuración de Firebase.'));
+    }
+    document.getElementById('foot').textContent = state.db ? 'Los cambios se guardan al instante y los ve todo el grupo.' : '';
+    document.title = state.view === 0 ? 'Bono Pro Amor' : 'Bono Pro Amor · ' + seniorName(state.view);
+  }
+
+  /* Escritura */
+  function say(t) { state.msg = t; var m = document.getElementById('msg'); if (m) m.textContent = t; }
+  function writeCell(n, i, data) {
+    var id = 's' + n + '-' + i;
+    if (state.db) {
+      var ref = state.db.doc('casillas/' + id);
+      return data ? ref.set(data) : ref.delete();
+    }
+    if (data) state.casillas[id] = data; else delete state.casillas[id];
+    render();
+    return Promise.resolve();
+  }
+  function saveName(n, value) {
+    var v = String(value || '').trim().slice(0, 40);
+    var p;
+    if (state.db) p = state.db.doc('seniors/s' + n).set({ name: v });
+    else { state.seniors['s' + n] = { name: v }; p = Promise.resolve(); }
+    p.then(function () { say(''); render(); }, function () { say('No se pudo guardar el nombre. Inténtalo de nuevo.'); });
+  }
+
+  /* Hoja de edición */
+  function closeEditor() {
+    state.editing = null;
+    document.getElementById('sheet-root').textContent = '';
+    if (state.lastFocus && state.lastFocus.focus) { try { state.lastFocus.focus(); } catch (e) {} }
+  }
+  function openEditor(n, i) {
+    state.lastFocus = document.activeElement;
+    state.editing = { n: n, i: i };
+    var d = cellData(n, i);
+    var amt = amountOf(i);
+    var input = h('input', { id: 'cell-name', type: 'text', maxlength: '40', autocomplete: 'off', value: d && d.nombre ? d.nombre : '' });
+    var err = h('p', { class: 'err', role: 'alert' });
+    function commit(estado) {
+      var nm = input.value.trim();
+      if (!nm) { err.textContent = 'Escribe el nombre de quien aporta.'; input.focus(); return; }
+      closeEditor();
+      writeCell(n, i, { nombre: nm.slice(0, 40), estado: estado }).then(function () { say(''); }, function () { say('No se pudo guardar. Inténtalo de nuevo.'); });
+    }
+    var occupied = !!d;
+    var sheet = h('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'sheet-title' },
+      h('h2', { id: 'sheet-title' }, 'Casilla de ' + money(amt)),
+      h('div', { style: 'display:flex;flex-direction:column;gap:6px' }, h('label', { for: 'cell-name' }, 'Nombre de quien aporta'), input),
+      err,
+      h('div', { class: 'btns' },
+        h('button', { type: 'button', class: 'btn primary', onclick: function () { commit('aporto'); } }, 'Ya aportó'),
+        h('button', { type: 'button', class: 'btn', onclick: function () { commit('prometido'); } }, 'Se comprometió'),
+        occupied ? h('button', { type: 'button', class: 'btn danger', onclick: function () {
+          closeEditor();
+          writeCell(n, i, null).then(function () { say(''); }, function () { say('No se pudo liberar la casilla. Inténtalo de nuevo.'); });
+        } }, 'Liberar casilla') : null,
+        h('button', { type: 'button', class: 'btn ghost', onclick: closeEditor }, 'Cerrar')));
+    var scrim = h('div', { class: 'scrim', onclick: function (e) { if (e.target === scrim) closeEditor(); } }, sheet);
+    var root = document.getElementById('sheet-root');
+    root.textContent = '';
+    root.appendChild(scrim);
+    input.focus();
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.editing) closeEditor(); });
+
+  var copyBtn = document.getElementById('copy-key');
+  if (copyBtn) copyBtn.addEventListener('click', function () {
+    function ok() { copyBtn.textContent = '¡Llave copiada!'; setTimeout(function () { copyBtn.textContent = 'Copiar llave'; }, 2000); }
+    function fallback() {
+      try {
+        var r = document.createRange(); r.selectNodeContents(document.getElementById('llave'));
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      } catch (e) {}
+      copyBtn.textContent = 'Selecciónala y cópiala';
+    }
+    try { navigator.clipboard.writeText('@NEQUICAR3883').then(ok, fallback); } catch (e) { fallback(); }
+  });
+
+  window.addEventListener('hashchange', function () {
+    route();
+    if (state.editing) closeEditor();
+    render();
+    window.scrollTo(0, 0);
+  });
+
+  /* Arranque: la página funciona sola y se conecta a la base cuando responde */
+  route();
+  render();
+  function snapMap(snap) { var o = {}; snap.docs.forEach(function (d) { o[d.id] = d.data(); }); return o; }
+  var FB = 'https://www.gstatic.com/firebasejs/10.14.1/';
+  function offline() { state.dbChecked = true; state.db = null; render(); }
+  function startDb(cfg, appMod, fsMod) {
+    var fs = fsMod.getFirestore(appMod.initializeApp(cfg));
+    state.db = {
+      doc: function (path) {
+        var r = fsMod.doc(fs, path);
+        return { set: function (d) { return fsMod.setDoc(r, d); }, delete: function () { return fsMod.deleteDoc(r); } };
+      },
+      collection: function (name) {
+        var c = fsMod.collection(fs, name);
+        return {
+          onSnapshot: function (next, err) {
+            return fsMod.onSnapshot(c, function (snap) {
+              next({ docs: snap.docs.map(function (d) { return { id: d.id, data: function () { return d.data(); } }; }) });
+            }, err);
+          }
+        };
+      }
+    };
+    state.dbChecked = true;
+    state.db.collection('seniors').onSnapshot(function (sn) { state.seniors = snapMap(sn); render(); }, offline);
+    state.db.collection('casillas').onSnapshot(function (sn) { state.casillas = snapMap(sn); render(); }, offline);
+    render();
+  }
+  function connect() {
+    import('./firebase-config.js').then(function (m) {
+      var cfg = m.firebaseConfig || {};
+      if (!cfg.apiKey || String(cfg.apiKey).indexOf('PEGA') === 0) throw new Error('sin-config');
+      return Promise.all([import(FB + 'firebase-app.js'), import(FB + 'firebase-firestore.js')])
+        .then(function (mods) { startDb(cfg, mods[0], mods[1]); });
+    }).catch(offline);
+  }
+  connect();
+})();
+</script>
+</body>
+</html>
