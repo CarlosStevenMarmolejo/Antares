@@ -369,7 +369,7 @@ button, input { font: inherit; }
     var notice = document.getElementById('notice');
     notice.textContent = '';
     if (state.dbChecked && !state.db) {
-      notice.appendChild(h('p', { class: 'notice' }, 'Sin conexión a la base de datos: lo que marques aquí no se guarda ni lo ven los demás. Revisa que firebase-config.js tenga la configuración de Firebase.'));
+      notice.appendChild(h('p', { class: 'notice' }, 'Sin conexión a la base de datos: lo que marques aquí no se guarda ni lo ven los demás. Revisa que firebase-config.js tenga la configuración de Firebase.', state.dbError ? ' Detalle: ' + state.dbError : null));
     }
     document.getElementById('foot').textContent = state.db ? 'Los cambios se guardan al instante y los ve todo el grupo.' : '';
     document.title = state.view === 0 ? 'Bono Pro Amor' : 'Bono Pro Amor · ' + seniorName(state.view);
@@ -460,7 +460,7 @@ button, input { font: inherit; }
   render();
   function snapMap(snap) { var o = {}; snap.docs.forEach(function (d) { o[d.id] = d.data(); }); return o; }
   var FB = 'https://www.gstatic.com/firebasejs/10.14.1/';
-  function offline() { state.dbChecked = true; state.db = null; render(); }
+  function offline(e) { state.dbChecked = true; state.db = null; state.dbError = e ? String(e.code || e.message || e) : ''; render(); }
   function startDb(cfg, appMod, fsMod) {
     var fs = fsMod.getFirestore(appMod.initializeApp(cfg));
     state.db = {
